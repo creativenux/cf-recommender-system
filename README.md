@@ -1,2 +1,52 @@
-# cf-recommender-system
-This project implements a Collaborative Filtering Recommender System for university students. It provides personalized recommendations for books, societies, sports, and volunteer programs based on user interests and country of origin.
+# CF Recommender System
+
+## Description
+
+This project is a collaborative filtering recommender system designed for university students. It provides personalized recommendations for books, societies, sports, and volunteer programs based on a student's country of origin and their academic and extracurricular interests.
+
+## Features
+
+- Personalized recommendations for:
+  - Books
+  - Societies
+  - Sports
+  - Volunteer programs
+- Based on:
+  - Country of origin
+  - Academic interests
+  - Extracurricular interests
+- Uses collaborative filtering and TF-IDF vectorization for accurate recommendations
+- Includes an evaluation method to assess the recommender system's performance **(Not working yet)**
+
+## Installation
+
+1. Clone the repository: `git clone https://github.com/creativenux/cf-recommender-system.git`
+2. Open the project with juptyer notebook
+
+## Usage
+
+1. Ensure you have the following CSV files in the project directory:
+- books.csv
+- country_sports.csv
+- societies.csv
+- sports.csv
+- volunteer_programs.csv
+
+2. There are 2 main scrips you can run: 
+   1. `recommender-class` - This is an average systemt
+   2. `recommender-main` - This provides better recommendation compare to the first
+3. Follow the prompts to input your preferences and receive personalized recommendations.
+
+## Data Sources
+
+The system uses the following datasets:
+- Books: 4775 rows × 7 columns
+- Country Sports: 200 rows × 2 columns
+- Societies: 38 rows × 5 columns
+- Sports: 32 rows × 3 columns
+- Volunteer Programs: 55 rows × 4 columns
+
+## Evaluation (Not working yet)
+
+The system includes an `evaluate_recommender` method that assesses the performance of the recommender system using precision, recall, and F1 score metrics.
+
