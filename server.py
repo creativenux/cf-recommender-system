@@ -1,10 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from recommender import RecommenderSystem
 
 # create a new instance of our recommender
 recommenderSystem = RecommenderSystem()
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware, 
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def index():
@@ -21,7 +30,7 @@ def get_user_options():
 @app.post("/recommend")
 def recommend(user_options: dict):
     country, academic_interests, extracurricular_interests = recommenderSystem.compile_user_options({
-            'country': user_options['country'],
+            'country': int(user_options['country']),
             'academic_interests': user_options['academic_interests'],
             'extracurricular_interests': user_options['extracurricular_interests']
         })
