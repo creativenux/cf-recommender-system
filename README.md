@@ -37,6 +37,8 @@ This project is a collaborative filtering recommender system designed for univer
 1. Open the terminal and navigate to the project directory
 2. Install the required packages: `pip3 install -r requirements.txt`
 3. Run the server: `fastapi dev server.py`
+4. Open the `frontend` directory
+5. Open the `index.html` file in your browser or start with live server
 
 ## Data Sources
 The system uses the following datasets:
