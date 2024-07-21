@@ -31,20 +31,15 @@ class RecommenderSystem:
         # Apply TF-IDF Vectorizer
         tfidf_books = TfidfVectorizer(stop_words='english')
         self.cosine_sim_books = cosine_similarity(tfidf_books.fit_transform(self.books_df['combined']))
-        print('Book cosine')
-        print(self.cosine_sim_books)
         
         tfidf_societies = TfidfVectorizer(stop_words='english')
         self.cosine_sim_societies = cosine_similarity(tfidf_societies.fit_transform(self.societies_df['combined']))
-        print(self.cosine_sim_societies)
         
         tfidf_sports = TfidfVectorizer(stop_words='english')
         self.cosine_sim_sports = cosine_similarity(tfidf_sports.fit_transform(self.sports_df['combined']))
-        print(self.cosine_sim_sports)
         
         tfidf_volunteer_programs = TfidfVectorizer(stop_words='english')
         self.cosine_sim_volunteer_programs = cosine_similarity(tfidf_volunteer_programs.fit_transform(self.volunteer_programs_df['combined']))
-        print(self.cosine_sim_volunteer_programs)
 
     def _get_recommendations(self, item_name, df, cosine_sim, num_recommendations=3):
         idx = df[df.iloc[:, 1] == item_name].index
@@ -89,9 +84,9 @@ class RecommenderSystem:
     
     def get_user_options(self):
         return {
-            "countries": self._get_countries_list(), 
-            "academic_activities": self._get_academic_activities_list(), 
-            "extracurricular_activities": self._get_extracurricular_activities_list()
+            "countries": list(self._get_countries_list()), 
+            "academic_activities": list(self._get_academic_activities_list()), 
+            "extracurricular_activities": list(self._get_extracurricular_activities_list())
         }
     
     def compile_user_options(self, options):
@@ -99,7 +94,7 @@ class RecommenderSystem:
         academic_indices = options['academic_interests']
         extracurricular_indices = options['extracurricular_interests']
 
-        country = self._get_countries_list()[country_index]
+        country = self._get_countries_list()[country_index-1]
 
         academic_indices = [int(i.strip()) - 1 for i in academic_indices.split(',')]
         academic_activities_list = self._get_academic_activities_list()
@@ -144,8 +139,7 @@ class RecommenderSystem:
 
         return country, academic_interests, extracurricular_interests
 
-    def get_recommendations(self):
-        country, academic_interests, extracurricular_interests = self.ask_user_preferences()
+    def get_recommendations(self, country, academic_interests, extracurricular_interests):
 
         recommendations = {
             'books': [],
