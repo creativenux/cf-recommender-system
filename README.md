@@ -35,10 +35,12 @@ This project is a collaborative filtering recommender system designed for univer
 
 ## Run the server and the webapp
 1. Open the terminal and navigate to the project directory
-2. Install the required packages: `pip3 install -r requirements.txt`
-3. Run the server: `fastapi dev server.py`
-4. Open the `frontend` directory
-5. Open the `index.html` file in your browser or start with live server
+2. Create a virtual environment: `python3 -m venv pyenv`
+3. Activate the virtual environment: `source pyenv/bin/activate`
+4. Install the required packages: `pip3 install -r requirements.txt`
+5. Run the server: `fastapi dev server.py`
+6. Open the `frontend` directory
+7. Open the `index.html` file in your browser or start with live server if you have the extension installed in VS code
 
 ## Data Sources
 The system uses the following datasets:
