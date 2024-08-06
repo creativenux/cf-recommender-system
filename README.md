@@ -14,7 +14,7 @@ This project is a content-based filtering recommender system designed for univer
   - Academic interests
   - Extracurricular interests
 - Uses content-based filtering and TF-IDF vectorization for accurate recommendations
-- Includes an evaluation method to assess the recommender system's performance **(Not working yet)**
+- Includes an evaluation method to assess the recommender system's performance
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/creativenux/cf-recommender-system.git`
