@@ -50,6 +50,14 @@ The system uses the following datasets:
 - Sports: 32 rows × 3 columns
 - Volunteer Programs: 55 rows × 4 columns
 
-## Evaluation (Not working yet)
-The system includes an `evaluate_recommender` method that assesses the performance of the recommender system using precision, recall, and F1 score metrics.
+## Evaluation
+- The system includes `evaluate_recommendations` method that assesses the performance of the recommender system using precision, recall, and F1 score metrics.
+- The performance for books, societies, and volunteer programs is quite low, while the performance for sports is perfect.
 
+Improvements suggestion
+
+1. Sports (Perfect performance): The perfect score here because we are directly using the country's preferred sports as recommendations. While this ensures accuracy, it might limit variety.
+2. Books (Very low performance):
+   1. Expand the matching criteria like book summaries, keywords, or tags in addition to classification levels.
+3. Societies (Low to moderate performance)
+4. Volunteer Programs (Very low performance)
