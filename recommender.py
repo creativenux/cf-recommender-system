@@ -137,9 +137,12 @@ class RecommenderSystem:
             'extracurricular_interests': extracurricular_indices
         })
 
-        return country, academic_interests, extracurricular_interests
+        # prompt user to enter no of recommendations they want
+        no_of_recommendations = int(input("Please enter the max no of recommendations you want (we recommend 3): ")) or 3
 
-    def get_recommendations(self, country, academic_interests, extracurricular_interests):
+        return country, academic_interests, extracurricular_interests, no_of_recommendations
+
+    def get_recommendations(self, country, academic_interests, extracurricular_interests, no_of_recommendation=3):
 
         recommendations = {
             'books': [],
@@ -186,7 +189,7 @@ class RecommenderSystem:
 
         # Ensure maximum of 3 unique recommendations for each category
         for category in recommendations:
-            recommendations[category] = list(set(recommendations[category]))[:3]
+            recommendations[category] = list(set(recommendations[category]))[:no_of_recommendation]
 
         return recommendations
 

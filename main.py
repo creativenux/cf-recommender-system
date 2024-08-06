@@ -3,8 +3,8 @@ from recommender import RecommenderSystem
 def main():
     # start our recommender
     recommender = RecommenderSystem()
-    country, academic_interests, extracurricular_interests = recommender.ask_user_preferences()
-    recommendations = recommender.get_recommendations(country, academic_interests, extracurricular_interests)
+    country, academic_interests, extracurricular_interests, no_of_recommendations = recommender.ask_user_preferences()
+    recommendations = recommender.get_recommendations(country, academic_interests, extracurricular_interests, no_of_recommendations)
 
     print("Here are some recommendations for you:")
     for category, items in recommendations.items():
