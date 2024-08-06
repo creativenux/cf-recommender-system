@@ -1,7 +1,7 @@
 # CF Recommender System
 
 ## Description
-This project is a collaborative filtering recommender system designed for university students. It provides personalized recommendations for books, societies, sports, and volunteer programs based on a student's country of origin and their academic and extracurricular interests.
+This project is a content-based filtering recommender system designed for university students. It provides personalized recommendations for books, societies, sports, and volunteer programs based on a student's country of origin and their academic and extracurricular interests.
 
 ## Features
 - Personalized recommendations for:
@@ -13,7 +13,7 @@ This project is a collaborative filtering recommender system designed for univer
   - Country of origin
   - Academic interests
   - Extracurricular interests
-- Uses collaborative filtering and TF-IDF vectorization for accurate recommendations
+- Uses content-based filtering and TF-IDF vectorization for accurate recommendations
 - Includes an evaluation method to assess the recommender system's performance **(Not working yet)**
 
 ## Installation
