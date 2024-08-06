@@ -35,10 +35,21 @@ def recommend(user_options: dict):
             'extracurricular_interests': user_options['extracurricular_interests']
         })
     
-    print(user_options)
-
     no_of_recommendation = int(user_options['no_of_recommendation']) or 3
     recommended_items = recommenderSystem.get_recommendations(country, academic_interests, extracurricular_interests, no_of_recommendation)
     return {
         'data': recommended_items
+    }
+
+@app.get("/evaluation")
+def get_performance_evaluation():
+    evaluation_results = recommenderSystem.evaluate_recommendations()
+    [ avg_scores, (overall_avg_precision, overall_avg_recall, overall_avg_f1) ] = evaluation_results
+    return {
+        'data': {
+            'avg_scores': avg_scores,
+            'overall_avg_precision': overall_avg_precision,
+            'overall_avg_recall': overall_avg_recall,
+            'overall_avg_f1': overall_avg_f1
+        }
     }

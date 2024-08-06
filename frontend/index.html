@@ -13,7 +13,8 @@
     <nav class="navbar bg-body-tertiary shadow">
         <div class="container">
             <h3 class="navbar-brand">Content-Based Recommender System</h3>
-            <button class="btn btn-outline-success" type="reset">Reset</button>
+            <button class="btn btn-outline-success" type="reset">Reset Page</button>
+            <button class="btn btn-outline-success" type="button" id="getEval">Get Evaluation</button>
         </div>
     </nav>
 
@@ -82,38 +83,53 @@
                     </div>
                 </form>
             </div>
-            <div class="col-6" id="recommendationBox" style="display: none;">
-                <div class="alert alert-success align-items-center" role="alert">
-                    <div>
-                        Your recommendation is ready
+            <div class="col-6">
+                <div class="row" id="recommendationBox" style="display: none;">
+                    <div class="alert alert-success align-items-center" role="alert">
+                        <div>
+                            Your recommendation is ready
+                        </div>
+                    </div>
+
+                    <div class="row g-3 shadow-md mt-2 p-4 border">
+                        <div class="col-12" id="bookRec">
+                            <h5>Book recommendations</h5>
+                            <ul class="list-group">
+                            </ul>
+                        </div>
+                        
+                        <div class="col-12" id="societyRec">
+                            <h5>Society recommendations</h5>
+                            <ul class="list-group">
+                            </ul>
+                        </div>
+                        
+                        <div class="col-12" id="sportRec">
+                            <h5>sports recommendations</h5>
+                            <ul class="list-group">
+                            </ul>
+                        </div>
+                        
+                        <div class="col-12" id="volunteerRec">
+                            <h5>Volunteer Programs recommendations</h5>
+                            <ul class="list-group">
+                            </ul>
+                        </div>
+        
+                    </div>
+                </div> 
+                <div class="row" id="eval" style="display: none;">
+                    <div class="col-12">
+                        <h5>Recommender Evaluation Results</h5>
+                        <div class="row g-3 shadow-md mt-2 p-4 border  placeholder-glow" id="evalTemp">
+                            <p class="placeholder col-12 placeholder-lg"></p>
+                            <p class="placeholder col-12 placeholder-lg"></p>
+                            <p class="placeholder col-12 placeholder-lg"></p>
+                        </div>
+                        <ul class="list-group">
+                        </ul>
                     </div>
                 </div>
-
-                <div class="row g-3 shadow-md mt-2 p-4 border">
-                    <div class="col-12" id="bookRec">
-                        <h5>Book recommendations</h5>
-                        <ul class="list-group">
-                        </ul>
-                    </div>
-                    
-                    <div class="col-12" id="societyRec">
-                        <h5>Society recommendations</h5>
-                        <ul class="list-group">
-                        </ul>
-                    </div>
-                    
-                    <div class="col-12" id="sportRec">
-                        <h5>sports recommendations</h5>
-                        <ul class="list-group">
-                        </ul>
-                    </div>
-                    
-                    <div class="col-12" id="volunteerRec">
-                        <h5>Volunteer Programs recommendations</h5>
-                        <ul class="list-group">
-                        </ul>
-                    </div>
-                </form>
             </div>
         </section>
     </main>

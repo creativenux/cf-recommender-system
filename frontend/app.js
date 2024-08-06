@@ -10,8 +10,10 @@ const bookRec = document.querySelector('#bookRec ul');
 const societyRec = document.querySelector('#societyRec ul');
 const sportRec = document.querySelector('#sportRec ul');
 const volunteerRec = document.querySelector('#volunteerRec ul');
+const evalPerformance = document.querySelector('#eval ul');
 
 const resetButton = document.querySelector('button[type=reset]');
+const getEvalButton = document.querySelector('button#getEval');
 const recommendationBox = document.querySelector('#recommendationBox');
 
 const get_user_options = async () => {
@@ -89,7 +91,9 @@ $('form').on('submit', async function(e) {
             timeout: 5000
         })
         if(resp.ok) {
-            const { data: { books, societies, sports, volunteer_programs } } = await resp.json();
+            const { 
+                data: { books, societies, sports, volunteer_programs }
+            } = await resp.json();
             if(books.length) {
                 books.forEach(book => {
                     bookRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">${book}</li>`)
@@ -131,5 +135,28 @@ $('form').on('submit', async function(e) {
         $(errorAlert).show();
     }
 });
+
+const get_model_evaluation = async () => {
+    const options = await fetch('http://127.0.0.1:8000/evaluation')
+    if(!options.ok) {
+        // error getting evaluation
+        return;
+    }
+    const { data: { overall_avg_precision, overall_avg_recall, overall_avg_f1 } } = await options.json();
+
+    evalPerformance.insertAdjacentHTML('beforeend', `
+        <li class="list-group-item">Overall Average Precision: ${(overall_avg_precision * 100).toFixed(1) + '%'}</li>
+        <li class="list-group-item">Overall Average Recall: ${(overall_avg_recall * 100).toFixed(1) + '%'}</li>
+        <li class="list-group-item">Overall Average F1-score: ${(overall_avg_f1 * 100).toFixed(1) + '%'}</li>
+    `)
+    $('#evalTemp').hide();
+}
+
+getEvalButton.addEventListener('click', function() {
+    evalPerformance.innerHTML = '';
+    $('#eval').show();
+    $('#evalTemp').show();
+    get_model_evaluation();
+}, false);
 
 get_user_options();

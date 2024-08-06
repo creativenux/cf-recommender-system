@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_score, recall_score, f1_score
 import numpy as np
+import re
 
 class RecommenderSystem:
     def __init__(self):
@@ -53,21 +54,6 @@ class RecommenderSystem:
         sim_scores = sim_scores[1:num_recommendations+1]
         item_indices = [i[0] for i in sim_scores]
         return df.iloc[item_indices].iloc[:, 1:3]
-
-    def get_book_recommendations(self, book_title, num_recommendations=3):
-        recommendations = self._get_recommendations(book_title, self.books_df, self.cosine_sim_books, num_recommendations)
-        if recommendations.empty:
-            return []
-        return recommendations['book_title'].tolist()
-
-    def get_society_recommendations(self, society_name, num_recommendations=3):
-        return self._get_recommendations(society_name, self.societies_df, self.cosine_sim_societies, num_recommendations)
-
-    def get_sport_recommendations(self, sport_name, num_recommendations=3):
-        return self._get_recommendations(sport_name, self.sports_df, self.cosine_sim_sports, num_recommendations)
-
-    def get_volunteer_program_recommendations(self, program_name, num_recommendations=3):
-        return self._get_recommendations(program_name, self.volunteer_programs_df, self.cosine_sim_volunteer_programs, num_recommendations)
 
     def _get_countries_list(self):
         return self.country_sports_df['country'].unique()
@@ -164,11 +150,11 @@ class RecommenderSystem:
         # Get book recommendations based on academic interests
         for interest in academic_interests:
             mask_book = (
-                self.books_df['classification_level_1'].str.contains(interest, case=False, na=False)
+                self.books_df['classification_level_1'].str.contains(re.escape(interest), case=False, na=False, regex=True)
                 |
-                self.books_df['classification_level_2'].str.contains(interest, case=False, na=False)
+                self.books_df['classification_level_2'].str.contains(re.escape(interest), case=False, na=False,  regex=True)
                 |
-                self.books_df['classification_level_3'].str.contains(interest, case=False, na=False)
+                self.books_df['classification_level_3'].str.contains(re.escape(interest), case=False, na=False,  regex=True)
             )
             book_recs = self.books_df[mask_book]['book_title'].tolist()
             recommendations['books'].extend(book_recs)
@@ -193,71 +179,82 @@ class RecommenderSystem:
 
         return recommendations
 
-    # TODO: fix book recommendation bug here
-    def evaluate_recommender(self, num_iterations=100):
-        precision_scores = []
-        recall_scores = []
-        f1_scores = []
+    def evaluate_recommendations(self, num_iterations=100):
+        results = {
+            'books': [],
+            'societies': [],
+            'sports': [],
+            'volunteer_programs': []
+        }
 
         for _ in range(num_iterations):
-            # Split the data into training and testing sets
-            train_books, test_books = train_test_split(self.books_df, test_size=0.2)
-            train_societies, test_societies = train_test_split(self.societies_df, test_size=0.2)
-            train_sports, test_sports = train_test_split(self.sports_df, test_size=0.2)
-            train_volunteer, test_volunteer = train_test_split(self.volunteer_programs_df, test_size=0.2)
+            # Randomly select a country
+            country = np.random.choice(self._get_countries_list())
 
-            # Create temporary recommendation system with training data
-            temp_system = RecommenderSystem()
-            temp_system.books_df = train_books
-            temp_system.societies_df = train_societies
-            temp_system.sports_df = train_sports
-            temp_system.volunteer_programs_df = train_volunteer
-            temp_system._preprocess_data()
-            temp_system._create_similarity_matrices()
+            # Randomly select academic interests
+            academic_interests = np.random.choice(
+                self._get_academic_activities_list(),
+                size=min(4, len(self._get_academic_activities_list())),
+                replace=False
+            )
 
-            # Generate recommendations for test data
-            true_labels = []
-            predicted_labels = []
+            # Randomly select extracurricular interests
+            extracurricular_interests = np.random.choice(
+                self._get_extracurricular_activities_list(),
+                size=min(4, len(self._get_extracurricular_activities_list())),
+                replace=False
+            )
 
-            def process_recommendations(recs, train_data, id_column):
-                if recs.empty:
-                    return
-                true_labels.extend([1] + [0] * (len(recs) - 1))
-                predicted_labels.extend([1 if item in train_data[id_column].values else 0 for item in recs[id_column]])
+            # Get recommendations
+            recommendations = self.get_recommendations(country, academic_interests, extracurricular_interests)
 
-            for _, row in test_books.iterrows():
-                recs = temp_system.get_book_recommendations(row['book_title'])
-                process_recommendations(recs, train_books, 'book_title')
+            # Evaluate each category
+            for category in results.keys():
+                if category == 'sports':
+                    # For sports, check if recommended sports are in the country's preferred sports
+                    preferred_sports = self.country_sports_df[self.country_sports_df['country'] == country]['preferred_sport'].values[0].split(', ')
+                    relevant = set(recommendations[category]) & set(preferred_sports)
+                elif category == 'books':
+                    # For books, check if recommended books match any of the academic interests
+                    relevant = [book for book in recommendations[category] if any(interest.lower() in book.lower() for interest in academic_interests)]
+                else:
+                    # For societies and volunteer programs, check if recommended items match any of the extracurricular interests
+                    relevant = [item for item in recommendations[category] if any(interest.lower() in item.lower() for interest in extracurricular_interests)]
 
-            for _, row in test_societies.iterrows():
-                recs = temp_system.get_society_recommendations(row['society_name'])
-                process_recommendations(recs, train_societies, 'society_name')
+                precision = len(relevant) / len(recommendations[category]) if recommendations[category] else 0
+                recall = len(relevant) / len(set(preferred_sports if category == 'sports' else (academic_interests if category == 'books' else extracurricular_interests)))
+                f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
 
-            for _, row in test_sports.iterrows():
-                recs = temp_system.get_sport_recommendations(row['sport_name'])
-                process_recommendations(recs, train_sports, 'sport_name')
+                results[category].append({
+                    'precision': precision,
+                    'recall': recall,
+                    'f1': f1
+                })
 
-            for _, row in test_volunteer.iterrows():
-                recs = temp_system.get_volunteer_program_recommendations(row['program_name'])
-                process_recommendations(recs, train_volunteer, 'program_name')
-
-            # Calculate metrics only if we have predictions
-            if predicted_labels:
-                precision_scores.append(precision_score(true_labels, predicted_labels))
-                recall_scores.append(recall_score(true_labels, predicted_labels))
-                f1_scores.append(f1_score(true_labels, predicted_labels))
-
-        # Return average scores
-        if precision_scores:
-            return {
-                'precision': np.mean(precision_scores),
-                'recall': np.mean(recall_scores),
-                'f1': np.mean(f1_scores)
+        # Calculate average scores
+        avg_scores = {}
+        for category, scores in results.items():
+            avg_scores[category] = {
+                'avg_precision': np.mean([s['precision'] for s in scores]),
+                'avg_recall': np.mean([s['recall'] for s in scores]),
+                'avg_f1': np.mean([s['f1'] for s in scores])
             }
-        else:
-            print("Warning: No valid recommendations were generated during evaluation.")
-            return {
-                'precision': 0,
-                'recall': 0,
-                'f1': 0
-            }
+
+        # Print results
+        # for category, scores in avg_scores.items():
+        #     print(f"\nResults for {category}:")
+        #     print(f"Average Precision: {scores['avg_precision']:.4f}")
+        #     print(f"Average Recall: {scores['avg_recall']:.4f}")
+        #     print(f"Average F1-score: {scores['avg_f1']:.4f}")
+
+        # Calculate overall average scores
+        overall_avg_precision = np.mean([scores['avg_precision'] for scores in avg_scores.values()])
+        overall_avg_recall = np.mean([scores['avg_recall'] for scores in avg_scores.values()])
+        overall_avg_f1 = np.mean([scores['avg_f1'] for scores in avg_scores.values()])
+
+        # print("\nOverall Results:")
+        # print(f"Overall Average Precision: {overall_avg_precision:.4f}")
+        # print(f"Overall Average Recall: {overall_avg_recall:.4f}")
+        # print(f"Overall Average F1-score: {overall_avg_f1:.4f}")
+
+        return [avg_scores, (overall_avg_precision, overall_avg_recall, overall_avg_f1)]
