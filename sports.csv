@@ -1,0 +1,33 @@
+sport_id,sport_name,sport_description,sport_keywords,sport_link
+1,Athletics,"Involves running, jumping, and throwing events.","Running, Jumping, Throwing",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+2,Badminton,"Played indoors with shuttlecocks, either in singles or doubles.","Shuttlecocks, Racquet, Indoor",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+3,Basketball,A team sport played on a rectangular court aiming to score points by shooting a ball through a hoop.,"Team, Hoop, Rectangular Court",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+4,Boxing,A combat sport involving two opponents throwing punches at each other within a roped-off square ring.,"Combat, Punches, Ring",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+5,Cheerleading,"Performance activity involving chants, jumps, dances, and stunts to support sports teams.","Chants, Jumps, Stunts",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+6,Climbing (Shelterstone),Sport involving ascending indoor or outdoor artificial or natural rock formations.,"Ascending, Rock Formations, Indoor/Outdoor",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+7,Cricket,"Bat-and-ball game played between two teams on an oval-shaped field, involving batting, bowling, and fielding.","Bat-and-Ball, Oval-Shaped Field, Bowling",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+8,Curling,"A team sport played on ice, where players slide stones towards a target area.","Ice, Stones, Target Area",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+9,Dance,"Artistic expression through movement, often performed competitively or recreationally.","Movement, Expression, Artistic",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+10,Equestrian,"Sport involving horseback riding, including disciplines such as dressage, show jumping, and eventing.","Horseback Riding, Disciplines, Dressage",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+11,Football,A team sport involving kicking a ball to score goals in opposing teams' nets.,"Team, Kicking, Goals",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+12,"Gaelic Football, Hurling & Camogie","Traditional Irish sports including football, hurling, and camogie (women's hurling).","Traditional, Irish, Football",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+13,Golf,"Outdoor sport played on a course, aiming to hit a ball into a series of holes with the fewest strokes.","Course, Hitting, Holes",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+14,Gymnastics,"Athletic sport involving exercises requiring balance, strength, flexibility, and coordination.","Balance, Strength, Flexibility",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+15,Hockey,"A team sport played on a field or indoor rink, involving hitting a ball with sticks to score goals.","Team, Sticks, Goals",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+16,Karate,"Martial art involving striking, kicking, and defensive techniques.","Striking, Kicking, Defense",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+17,Kickboxing,"Combat sport combining elements of boxing and martial arts, involving kicking and punching.","Combat, Boxing, Kicking",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+18,Lacrosse,"Team sport played with a small rubber ball and long-handled sticks, aiming to score goals in opposing nets.","Rubber Ball, Long-Handled Sticks, Goals",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+19,Mountain Biking,"Off-road cycling sport, involving riding bicycles off paved surfaces.","Off-Road, Bicycles, Surfaces",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+20,Netball,"Team sport similar to basketball, primarily played by women, with rules restricting certain player movements.","Team, Similar to Basketball, Women's Sport",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+21,Rifle,Competitive shooting sport using rifles to hit targets from varying distances.,"Rifles, Targets, Shooting",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+22,Rowing,"Sport involving propelling a boat using oars, typically done in racing or recreational settings.","Boat, Oars, Racing",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+23,Rugby,"Contact team sport played with an oval ball, involving running, passing, and tackling.","Contact, Oval Ball, Tackling",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+24,Shinty,"Team sport originating in Scotland, played with sticks and a ball, similar to field hockey.","Scotland, Sticks, Field Hockey",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+25,Snowsports,"Various sports practiced on snow, including skiing, snowboarding, and freestyle skiing.","Snow, Skiing, Snowboarding",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+26,Squash,"Indoor racquet sport played in a four-walled court, involving hitting a ball against a front wall.","Racquet, Four-Walled Court, Indoor",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+27,Swimming & Waterpolo,Aquatic sports involving swimming races or team-based matches.,"Swimming, Aquatic, Team-based",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+28,Table Tennis,"Indoor racquet sport played on a table, involving hitting a lightweight ball back and forth over a net.","Racquet, Table, Lightweight Ball",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+29,Tennis,"Racquet sport played individually (singles) or between two teams of two players (doubles), hitting a ball over a net.","Racquet, Singles/Doubles, Net",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+30,Trampolining,"Sport involving acrobatic movements performed on a trampoline, often in a competitive setting.","Acrobatic, Trampoline, Competitive",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+31,Volleyball,"Team sport played on a court, involving hitting a ball over a net to score points.","Team, Court, Net",https://www.rguunion.co.uk/getinvolved/sport/a-z/
+32,Weightlifting,Strength sport involving lifting weights in prescribed manners to demonstrate strength and power.,"Weights, Strength, Lifting",https://www.rguunion.co.uk/getinvolved/sport/a-z/
