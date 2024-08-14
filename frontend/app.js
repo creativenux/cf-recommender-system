@@ -82,6 +82,7 @@ $('form').on('submit', async function(e) {
             </div>
         `);
         emptyResult();
+        recommendationBox.scrollIntoView({ behavior: 'smooth' });
         const resp = await fetch('/recommend', {
             method: 'POST',
             body: JSON.stringify(formData),
@@ -156,6 +157,7 @@ getEvalButton.addEventListener('click', function() {
     evalPerformance.innerHTML = '';
     $('#eval').show();
     $('#evalTemp').show();
+    $('#eval')[0].scrollIntoView({ behavior: 'smooth' });
     get_model_evaluation();
 }, false);
 
