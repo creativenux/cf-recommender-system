@@ -93,7 +93,8 @@ $('form').on('submit', async function(e) {
         })
         if(resp.ok) {
             const { 
-                data: { books, societies, sports, volunteer_programs }
+                data: { books, societies, sports, volunteer_programs },
+                links
             } = await resp.json();
             if(books.length) {
                 books.forEach(book => {
@@ -104,24 +105,30 @@ $('form').on('submit', async function(e) {
             }
             
             if(societies.length) {
-                societies.forEach(society => {
-                    societyRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">${society}</li>`)
+                societies.forEach((society, index) => {
+                    societyRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">
+                        ${society} - <a href="${links.societies[index]}" target="_blank">Learn more</a>
+                    </li>`)
                 })
             } else {
                 societyRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">No society recommendation</li>`)
             }
             
             if(sports) {
-                sports.forEach(sport => {
-                    sportRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">${sport}</li>`)
+                sports.forEach((sport, index) => {
+                    sportRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">
+                        ${sport} - <a href="${links.sports[index]}" target="_blank">Learn more</a>
+                    </li>`)
                 })
             } else {
                 sportRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">No sport recommendation</li>`)
             }
             
             if(volunteer_programs) {
-                volunteer_programs.forEach(volunteer => {
-                    volunteerRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">${volunteer}</li>`)
+                volunteer_programs.forEach((volunteer, index) => {
+                    volunteerRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">
+                        ${volunteer}  - <a href="${links.volunteer_programs[index]}" target="_blank">Learn more</a>
+                    </li>`)
                 })
             } else {
                 volunteerRec.insertAdjacentHTML('beforeend', `<li class="list-group-item">No volunteer program recommendation</li>`)

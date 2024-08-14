@@ -141,10 +141,6 @@ class RecommenderSystem:
         preferred_sports = self.country_sports_df[self.country_sports_df['country'] == country]['preferred_sport'].values
         if len(preferred_sports) > 0:
             preferred_sports = preferred_sports[0].split(', ')
-#             for sport in preferred_sports:
-#                 sport_recs = self.get_sport_recommendations(sport)
-#                 recommendations['sports'].extend(sport_recs['sport_name'].tolist())
-            # set the preferred_sports in the country-sports data set as the sport recommendation
             recommendations['sports'].extend(preferred_sports)
 
         # Get book recommendations based on academic interests
@@ -258,3 +254,11 @@ class RecommenderSystem:
         # print(f"Overall Average F1-score: {overall_avg_f1:.4f}")
 
         return [avg_scores, (overall_avg_precision, overall_avg_recall, overall_avg_f1)]
+    
+    def get_links(self, recommendations):
+        links = {
+            'societies': self.societies_df[self.societies_df['society_name'].isin(recommendations['societies'])]['society_link'].tolist(),
+            'sports': self.sports_df[self.sports_df['sport_name'].isin(recommendations['sports'])]['sport_link'].tolist(),
+            'volunteer_programs': self.volunteer_programs_df[self.volunteer_programs_df['program_name'].isin(recommendations['volunteer_programs'])]['program_link'].tolist()
+        }
+        return links

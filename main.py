@@ -46,8 +46,10 @@ def recommend(user_options: dict):
     
     no_of_recommendation = int(user_options['no_of_recommendation']) or 3
     recommended_items = recommenderSystem.get_recommendations(country, academic_interests, extracurricular_interests, no_of_recommendation)
+    recommendation_links = recommenderSystem.get_links(recommended_items)
     return {
-        'data': recommended_items
+        'data': recommended_items,
+        'links': recommendation_links
     }
 
 @app.get("/evaluation")
