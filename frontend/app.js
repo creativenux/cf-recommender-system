@@ -17,7 +17,7 @@ const getEvalButton = document.querySelector('button#getEval');
 const recommendationBox = document.querySelector('#recommendationBox');
 
 const get_user_options = async () => {
-    const options = await fetch('http://127.0.0.1:8000/user-options')
+    const options = await fetch('/user-options')
     if(options.ok) {
         formTemp.style.display = 'none';
         form.style.display = 'block';
@@ -82,7 +82,7 @@ $('form').on('submit', async function(e) {
             </div>
         `);
         emptyResult();
-        const resp = await fetch('http://127.0.0.1:8000/recommend', {
+        const resp = await fetch('/recommend', {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
@@ -137,7 +137,7 @@ $('form').on('submit', async function(e) {
 });
 
 const get_model_evaluation = async () => {
-    const options = await fetch('http://127.0.0.1:8000/evaluation')
+    const options = await fetch('/evaluation')
     if(!options.ok) {
         // error getting evaluation
         return;
